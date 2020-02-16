@@ -24,7 +24,7 @@ services:
       - 8306:3306
     volumes:
       - /var/lib/mysql/db:/var/lib/mysql/db
-      
+
   rclone-dlna-server:
     container_name: rclone-dlna-server
 
@@ -47,7 +47,7 @@ services:
 
     # Use host networking for simplicity with DLNA broadcasts
     # and to avoid having to do port mapping.
-    net: host
+    network: host
 
     # Here you have to map your host's rclone.conf directory to
     # container's /root/.config/rclone/ dir (R/O).

@@ -16,11 +16,12 @@ RUN docker-php-ext-install mysql
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo
 RUN docker-php-ext-install pdo_mysql
-RUN curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+RUN cd /tmp \
+    && curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar -xvvzf ioncube.tar.gz \
-    && mv ioncube/ioncube_loader_lin_5.5.so `php-config --extension-dir` \
+    && mv ioncube/ioncube_loader_lin_5.5.so /usr/local/lib/php/extensions/* \
     && rm -Rf ioncube.tar.gz ioncube \
-    && docker-php-ext-enable ioncube_loader_lin_5.5
+    && echo "zend_extension=ioncube_loader_lin_5.5.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube_loader_lin_5.5.ini
 # Install PECL extensions
 #RUN docker-php-pecl-install <package_name-version> (versions available in PECL repository allowed)
 

@@ -11,6 +11,9 @@ services:
     volumes:
       - .:/var/www/docker-lamp-php-5
       - ./logs/apache2:/var/log/apache2
+      - ./docker/src:/var/www/html
+    environment:
+        -ALLOW_OVERRIDE=true
 
   db:
     image: mysql:5.5
